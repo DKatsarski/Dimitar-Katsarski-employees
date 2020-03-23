@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Empolyees_Analyzer
+namespace EmpolyeesAnalyzer
 {
     class Program
     {
