@@ -6,12 +6,12 @@ namespace EmpolyeesAnalyzer
     {
         static void Main()
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\dkats\Desktop\myText.txt");
+            Console.WriteLine("Please add a file location");
 
-            for (int i = 0; i < lines.Length; i++)
-            {
-                Console.WriteLine(lines[i]);
-            }
+            var fileLocation = Console.ReadLine();
+            string[] lines = System.IO.File.ReadAllLines(fileLocation);
+
+
         }
     }
 }
