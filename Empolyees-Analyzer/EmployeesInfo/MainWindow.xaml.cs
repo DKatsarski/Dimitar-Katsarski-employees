@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -41,6 +42,23 @@ namespace EmployeesInfo
         {
             var d = new Employee() { Id = 23};
             EmployeesDataGrid.Items.Add(d);
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+                Title = "Browse Text Files",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                DefaultExt = "txt",
+            };
+
+           openFileDialog1.ShowDialog();
+
+            var a = openFileDialog1.FileName;
+
+
+            string[] lines = System.IO.File.ReadAllLines(a);
+
+
         }
     }
 }
