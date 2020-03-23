@@ -24,5 +24,10 @@ namespace Employees.DataGrid
         {
             InitializeComponent();
         }
+
+        private void MyDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
