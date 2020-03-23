@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Empolyees-Analyzer", "Empolyees-Analyzer\Empolyees-Analyzer.csproj", "{F78BC6F6-B2D4-4B74-82BF-E5B13D263166}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F78BC6F6-B2D4-4B74-82BF-E5B13D263166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F78BC6F6-B2D4-4B74-82BF-E5B13D263166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F78BC6F6-B2D4-4B74-82BF-E5B13D263166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F78BC6F6-B2D4-4B74-82BF-E5B13D263166}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A54AC5CE-069B-4A5F-928C-88A0E00E24FB}
+	EndGlobalSection
+EndGlobal
