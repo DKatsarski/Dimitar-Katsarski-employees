@@ -23,10 +23,25 @@ namespace Employees.DataGrid
         public MainWindow()
         {
             InitializeComponent();
+
+ 
+
         }
 
-        private void MyDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CompanyProjectsDb_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var firstEmp = new Employee();
+
+            firstEmp.EmpID = "23";
+            firstEmp.Name = "df";
+
+            CompanyProjectsDb.Items.Add(firstEmp);
+        }
+
+        public class Employee
+        {
+            public string EmpID { get; set; }
+            public string Name { get; set; }
 
         }
     }

@@ -6,16 +6,11 @@
         xmlns:local="clr-namespace:Employees.DataGrid"
         mc:Ignorable="d"
         Title="Employees Data"  Background="Azure" Height="250" Width="800">
-    <Grid Margin="10,0,0,-16" Height="250" VerticalAlignment="Bottom">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="71*"/>
-            <ColumnDefinition Width="263*"/>
-            <ColumnDefinition Width="460*"/>
-        </Grid.ColumnDefinitions>
-        <DataGrid x:Name="MyDataGrid" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,10,0,0" Width="937" RenderTransformOrigin="0.509,1.751" Grid.ColumnSpan="4" SelectionChanged="MyDataGrid_SelectionChanged" Height="26" >
+    <Grid>
+        <DataGrid x:Name="CompanyProjectsDb" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="0,10,0,0" Width="931" RenderTransformOrigin="0.509,1.751" Grid.ColumnSpan="4" SelectionChanged="CompanyProjectsDb_SelectionChanged"  Height="26" Grid.Column="1" >
+
             <DataGrid.Columns>
-                <DataGridTextColumn Header="EmpID" Width="200"/>
+                <DataGridTextColumn Header="EmpID" Binding="{Binding EmpID}" Width="200" />
                 <DataGridTextColumn Header="ProjectID" Width="200"/>
                 <DataGridTextColumn Header="DateFrom" Width="200"/>
                 <DataGridTextColumn Header="DateTo" Width="*"/>
