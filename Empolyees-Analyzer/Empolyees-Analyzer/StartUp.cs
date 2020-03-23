@@ -2,7 +2,7 @@
 
 namespace EmpolyeesAnalyzer
 {
-    class Program
+    public class Startup
     {
         static void Main()
         {
