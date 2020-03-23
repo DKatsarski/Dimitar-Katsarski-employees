@@ -36,5 +36,11 @@ namespace EmployeesInfo
         {
             public int Id { get; set; }
         }
+
+        private void AddTextFile_Clicked(object sender, RoutedEventArgs e)
+        {
+            var d = new Employee() { Id = 23};
+            EmployeesDataGrid.Items.Add(d);
+        }
     }
 }
