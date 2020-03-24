@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace EmployeesInfo.Models
 {
@@ -8,5 +6,6 @@ namespace EmployeesInfo.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Employee> Employees { get; set; }
     }
 }
