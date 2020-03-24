@@ -3,6 +3,7 @@ using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace EmployeesInfo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -32,9 +30,7 @@ namespace EmployeesInfo
 
         private void AddTextFile_Clicked(object sender, RoutedEventArgs e)
         {
-
-
-            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog
             {
                 Title = "Browse Text Files",
                 CheckFileExists = true,
@@ -42,40 +38,43 @@ namespace EmployeesInfo
                 DefaultExt = "txt",
             };
 
-            openFileDialog1.ShowDialog();
-
-            var selectedFile = openFileDialog1.FileName;
-            string[] lines = System.IO.File.ReadAllLines(selectedFile);
-
-            var projectsEmplyees = new List<ProjectsEmplyees>();
-
+            openFileDialog.ShowDialog();
+            var selectedFile = openFileDialog.FileName;
+            var db = File.ReadAllLines(selectedFile);
             char[] delimiterChars = { ' ', ',' };
 
-            foreach (var emplyee in lines)
-            {
-                var dbFiller = emplyee.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+            var projectsEmplyeesDb = ParseDb(delimiterChars, db);
 
-                if (dbFiller[3] == "NULL")
+            //Calculates the longest wokring 
+            var result = GetTheTwoMostWorkedTogether(projectsEmplyeesDb);
+
+            EmployeesDataGrid.Items.Add(result);
+        }
+
+        private List<ProjectsEmplyees> ParseDb(char[] delimiterChars, string[] db)
+        {
+            var projectsEmplyees = new List<ProjectsEmplyees>();
+
+            foreach (var emplyee in db)
+            {
+                var dbFragment = emplyee.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+
+                if (dbFragment[3] == "NULL")
                 {
-                    dbFiller[3] = DateTime.Now.ToString("yyyy-MM-dd");
+                    dbFragment[3] = DateTime.Now.ToString("yyyy-MM-dd");
                 }
 
                 projectsEmplyees.Add(new ProjectsEmplyees
                 {
-                    EmployeeId = int.Parse(dbFiller[0]),
-                    ProjectId = int.Parse(dbFiller[1]),
-                    DateFrom = DateTime.ParseExact(dbFiller[2], "yyyy-MM-dd", CultureInfo.InvariantCulture),
-                    DateTo = DateTime.ParseExact(dbFiller[3], "yyyy-MM-dd", CultureInfo.InvariantCulture)
+                    EmployeeId = int.Parse(dbFragment[0]),
+                    ProjectId = int.Parse(dbFragment[1]),
+                    DateFrom = DateTime.ParseExact(dbFragment[2], "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact(dbFragment[3], "yyyy-MM-dd", CultureInfo.InvariantCulture)
                 });
+
             }
 
-
-
-            //Calculates the longest wokring 
-           var result = GetTheTwoMostWorkedTogether(projectsEmplyees);
-
-            EmployeesDataGrid.Items.Add(result);
-
+            return projectsEmplyees;
         }
 
         static EmployeesStatsDTO GetTheTwoMostWorkedTogether(List<ProjectsEmplyees> projects)
@@ -89,8 +88,8 @@ namespace EmployeesInfo
 
             foreach (var employee in projects)
             {
-                 employeeId = employee.EmployeeId;
-                 projectId = employee.ProjectId;
+                employeeId = employee.EmployeeId;
+                projectId = employee.ProjectId;
 
                 Period idPeriod = new Period(employee.DateFrom, employee.DateTo);
 
