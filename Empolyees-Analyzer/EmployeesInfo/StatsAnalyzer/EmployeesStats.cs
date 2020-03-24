@@ -1,9 +1,10 @@
-﻿using EmployeesInfo.Models;
+﻿using EmployeesInfo.Contracts;
+using EmployeesInfo.Models;
 using System.Collections.Generic;
 
 namespace EmployeesInfo.StatsAnalyzer
 {
-    public class EmployeesStats
+    public class EmployeesStats : IStatsAnalyzer
     {
         public EmployeesStatsDTO GetTheTwoMostWorkedTogether(List<ProjectsEmplyees> projects)
         {
