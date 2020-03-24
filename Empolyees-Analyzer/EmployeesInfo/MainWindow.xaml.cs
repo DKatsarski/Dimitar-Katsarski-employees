@@ -1,8 +1,10 @@
-﻿using Microsoft.Win32;
+﻿using EmployeesInfo.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,23 +27,18 @@ namespace EmployeesInfo
         {
             InitializeComponent();
 
+
+        }
+
+
+        private void AddTextFile_Clicked(object sender, RoutedEventArgs e)
+        {
             var emp = new Employee()
             {
                 Id = 23
             };
 
             EmployeesDataGrid.Items.Add(emp);
-        }
-
-        public class Employee
-        {
-            public int Id { get; set; }
-        }
-
-        private void AddTextFile_Clicked(object sender, RoutedEventArgs e)
-        {
-            var d = new Employee() { Id = 23};
-            EmployeesDataGrid.Items.Add(d);
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
@@ -57,8 +54,31 @@ namespace EmployeesInfo
 
 
             string[] lines = System.IO.File.ReadAllLines(a);
+            var projectsEmplyees = new List<ProjectsEmplyees>();
+            char[] delimiterChars = { ' ', ',' };
 
+            foreach (var emplyee in lines)
+            {
+                var dbFiller = emplyee.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
+                for (int i = 0; i < 1; i++)
+                {
+                    projectsEmplyees.Add(new ProjectsEmplyees
+                    {
+                        EmployeeId = int.Parse(dbFiller[i]),
+                        ProjectId = int.Parse(dbFiller[i + 1]),
+                        //DateFrom = DateTime.Parse(dbFiller[i + 2]),
+                        //DateTo = DateTime.Parse(dbFiller[i + 3])
+                        DateFrom = dbFiller[i + 2],
+                        DateTo = dbFiller[i + 3],
+                    });
+                }
+ 
+            }
 
+            foreach (var item in projectsEmplyees)
+            {
+
+            }
 
         }
     }
