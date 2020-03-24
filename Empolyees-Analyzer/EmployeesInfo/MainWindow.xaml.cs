@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -33,12 +34,7 @@ namespace EmployeesInfo
 
         private void AddTextFile_Clicked(object sender, RoutedEventArgs e)
         {
-            var emp = new Employee()
-            {
-                Id = 23
-            };
 
-            EmployeesDataGrid.Items.Add(emp);
 
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
@@ -48,37 +44,35 @@ namespace EmployeesInfo
                 DefaultExt = "txt",
             };
 
-           openFileDialog1.ShowDialog();
+            openFileDialog1.ShowDialog();
 
-            var a = openFileDialog1.FileName;
+            var selectedFile = openFileDialog1.FileName;
+            string[] lines = System.IO.File.ReadAllLines(selectedFile);
 
-
-            string[] lines = System.IO.File.ReadAllLines(a);
             var projectsEmplyees = new List<ProjectsEmplyees>();
+
             char[] delimiterChars = { ' ', ',' };
 
             foreach (var emplyee in lines)
             {
                 var dbFiller = emplyee.Split(delimiterChars, StringSplitOptions.RemoveEmptyEntries);
-                for (int i = 0; i < 1; i++)
+
+                if (dbFiller[3] == "NULL")
                 {
-                    projectsEmplyees.Add(new ProjectsEmplyees
-                    {
-                        EmployeeId = int.Parse(dbFiller[i]),
-                        ProjectId = int.Parse(dbFiller[i + 1]),
-                        //DateFrom = DateTime.Parse(dbFiller[i + 2]),
-                        //DateTo = DateTime.Parse(dbFiller[i + 3])
-                        DateFrom = dbFiller[i + 2],
-                        DateTo = dbFiller[i + 3],
-                    });
+                    dbFiller[3] = DateTime.Now.ToString("yyyy-MM-dd");
                 }
- 
+
+                projectsEmplyees.Add(new ProjectsEmplyees
+                {
+                    EmployeeId = int.Parse(dbFiller[0]),
+                    ProjectId = int.Parse(dbFiller[1]),
+                    DateFrom = DateTime.ParseExact(dbFiller[2], "yyyy-MM-dd", CultureInfo.InvariantCulture),
+                    DateTo = DateTime.ParseExact(dbFiller[3], "yyyy-MM-dd", CultureInfo.InvariantCulture)
+                });
+
             }
 
-            foreach (var item in projectsEmplyees)
-            {
 
-            }
 
         }
     }

@@ -9,10 +9,10 @@
     <Grid>
         <DataGrid x:Name="EmployeesDataGrid" Margin="0,0,0,234">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="EmpID" Binding="{Binding Id}" Width="160" />
-                <DataGridTextColumn Header="ProjectID" Width="160"/>
-                <DataGridTextColumn Header="DateFrom" Width="160" />
-                <DataGridTextColumn Header="DateTo" Width="*" />
+                <DataGridTextColumn Header="EmpID" Binding="{Binding EmployeeId}" Width="160" />
+                <DataGridTextColumn Header="ProjectID" Binding="{Binding ProjectId}" Width="160"/>
+                <DataGridTextColumn Header="DateFrom" Binding="{Binding DateFrom}" Width="160" />
+                <DataGridTextColumn Header="DateTo" Binding="{Binding DateTo}" Width="*" />
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Add Text File" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Click="AddTextFile_Clicked"/>
